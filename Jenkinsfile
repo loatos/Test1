@@ -1,14 +1,25 @@
 pipeline {
-  agent {
-    docker {
-      image 'php:8.4.8-alpine3.22'
+    agent any
+    environment {
+        // Using returnStdout
+        CC = """${sh(
+                returnStdout: true,
+                script: 'echo "clang"'
+            )}"""
+        // Using returnStatus
+        EXIT_STATUS = """${sh(
+                returnStatus: true,
+                script: 'exit 1'
+            )}"""
     }
-  }
-  stages {
-    stage('construire') {
-      steps {
-        sh 'php --version'
-      }
+    stages {
+        stage('Example') {
+            environment {
+                DEBUG_FLAGS = '-g'
+            }
+            steps {
+                sh 'printenv'
+            }
+        }
     }
-  }
 }
