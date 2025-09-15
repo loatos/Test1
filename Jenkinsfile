@@ -4,7 +4,7 @@ pipeline {
         // Using returnStdout
         CC = """${sh(
                 returnStdout: true,
-                script: 'echo "clang"'
+                script: 'echo "clang TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"'
             )}"""
         // Using returnStatus
         EXIT_STATUS = """${sh(
