@@ -1,25 +1,24 @@
 pipeline {
-    agent any
-    environment {
-        // Using returnStdout
-        CC = """${sh(
-                returnStdout: true,
-                script: 'echo "clang TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"'
-            )}"""
-        // Using returnStatus
-        EXIT_STATUS = """${sh(
-                returnStatus: true,
-                script: 'exit 1'
-            )}"""
-    }
+    agent any   // Exécute sur n’importe quel agent disponible
+
     stages {
-        stage('Example') {
-            environment {
-                DEBUG_FLAGS = '-g'
-            }
+        stage('Build') {
             steps {
-                sh 'printenv'
+                echo "TESTTTTTTTTTTTT1 !"
+                sh 'echo "DATE TEST : $(date)"'
             }
+        }
+
+        stage('Environment') {
+            steps {
+                sh 'printenv'  
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline terminé (succès ou échec).'
         }
     }
 }
